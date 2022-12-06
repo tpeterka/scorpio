@@ -1,6 +1,10 @@
-cmake_minimum_required (VERSION 3.7)
+#cmake_minimum_required (VERSION 3.7)
+cmake_minimum_required (VERSION 3.20)
 project (SCORPIO C CXX Fortran)
 #cmake_policy(VERSION 3.5.2)
+
+#cmake_policy              (SET CMP0074 NEW)
+message("*** setting higher version of cmake to 3.20 ***")
 
 message(STATUS "===== Configuring SCORPIO... =====")
 
@@ -13,6 +17,8 @@ mark_as_advanced(VERSION_MAJOR VERSION_MINOR VERSION_PATCH)
 #==============================================================================
 #  ADD CMAKE MODULES IN SCORPIO TO CMAKE MODULE PATH
 #==============================================================================
+
+message("*** removing scorpio's find cmake for local modules ***")
 
 #===== Local modules =====
 list (APPEND CMAKE_MODULE_PATH ${SCORPIO_SOURCE_DIR}/cmake)

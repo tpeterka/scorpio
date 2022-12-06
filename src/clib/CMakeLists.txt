@@ -1,4 +1,6 @@
-cmake_minimum_required (VERSION 2.8.12)
+#cmake_minimum_required (VERSION 2.8.12)
+message("*** removed old version of src/clib/CMakeLists.txt, use root-level version ***")
+
 include (CheckFunctionExists)
 include(CheckTypeSize)
 include(SPIOTypeUtils)
@@ -142,14 +144,13 @@ endif ()
 
 #===== HDF5-C =====
 if (WITH_HDF5)
-  cmake_policy              (SET CMP0074 NEW)
   message                   ("*** looking for HDF5 ***")
-  find_package (HDF5 REQUIRED COMPONENTS C HL)
+  find_package (HDF5 COMPONENTS C HL)
   message                   ("HDF5_C_LIBRARIES = " ${HDF5_C_LIBRARIES})
   message                   ("HDF5_HL_LIBRARIES = " ${HDF5_HL_LIBRARIES})
   message                   ("HDF5_C_LIBRARY_hdf5 = " ${HDF5_C_LIBRARY_hdf5})
   message                   ("HDF5_C_LIBRARY_z = " ${HDF5_C_LIBRARY_z})
-  if (HDF5_FOUND)
+  if (HDF5_C_FOUND)
     message(STATUS "HDF5 C library dependencies: ${HDF5_C_LIBRARIES} ${HDF5_HL_LIBRARIES}")
     set(PIO_USE_HDF5 1)
     target_include_directories (pioc
