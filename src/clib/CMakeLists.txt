@@ -142,6 +142,7 @@ endif ()
 
 #===== HDF5-C =====
 if (WITH_HDF5)
+    cmake_policy              (SET CMP0074 NEW)
   message                   ("*** looking for HDF5 ***")
   find_package (HDF5 REQUIRED COMPONENTS C HL)
   message                   ("HDF5_C_LIBRARIES = " ${HDF5_C_LIBRARIES})
