@@ -143,7 +143,7 @@ endif ()
 #===== HDF5-C =====
 if (WITH_HDF5)
   find_package (HDF5 COMPONENTS HL C)
-  if (HDF5_C_FOUND)
+  if (HDF5_FOUND)
     message(STATUS "HDF5 C library dependencies: ${HDF5_C_LIBRARIES} ${HDF5_HL_LIBRARIES}")
     set(PIO_USE_HDF5 1)
     target_include_directories (pioc
