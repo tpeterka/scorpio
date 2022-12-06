@@ -143,7 +143,7 @@ endif ()
 #===== HDF5-C =====
 if (WITH_HDF5)
   message                   ("*** looking for HDF5 ***")
-  find_package (HDF5 COMPONENTS HL C)
+  find_package (HDF5 REQUIRED COMPONENTS C HL)
   message                   ("HDF5_C_LIBRARIES = " ${HDF5_C_LIBRARIES})
   message                   ("HDF5_HL_LIBRARIES = " ${HDF5_HL_LIBRARIES})
   message                   ("HDF5_C_LIBRARY_hdf5 = " ${HDF5_C_LIBRARY_hdf5})
