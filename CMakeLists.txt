@@ -1,24 +1,18 @@
-#cmake_minimum_required (VERSION 3.7)
-cmake_minimum_required (VERSION 3.20)
+cmake_minimum_required (VERSION 3.7)
 project (SCORPIO C CXX Fortran)
 #cmake_policy(VERSION 3.5.2)
-
-#cmake_policy              (SET CMP0074 NEW)
-message("*** setting higher version of cmake to 3.20 ***")
 
 message(STATUS "===== Configuring SCORPIO... =====")
 
 # The project version number.
 set(VERSION_MAJOR   1   CACHE STRING "Project major version number.")
-set(VERSION_MINOR   4   CACHE STRING "Project minor version number.")
-set(VERSION_PATCH   1   CACHE STRING "Project patch version number.")
+set(VERSION_MINOR   3   CACHE STRING "Project minor version number.")
+set(VERSION_PATCH   2   CACHE STRING "Project patch version number.")
 mark_as_advanced(VERSION_MAJOR VERSION_MINOR VERSION_PATCH)
 
 #==============================================================================
 #  ADD CMAKE MODULES IN SCORPIO TO CMAKE MODULE PATH
 #==============================================================================
-
-message("*** removing scorpio's find cmake for local modules ***")
 
 #===== Local modules =====
 list (APPEND CMAKE_MODULE_PATH ${SCORPIO_SOURCE_DIR}/cmake)
@@ -217,40 +211,6 @@ if(DEFINED PIO_RESERVED_FILE_HEADER_SIZE)
 else()
   set(PIO_RESERVED_FILE_HEADER_SIZE ${DEF_SPIO_RESERVED_FILE_HDR_SZ})
   message(STATUS "Reserving some extra space in the header when creating NetCDF files, requested bytes = " ${PIO_RESERVED_FILE_HEADER_SIZE} " (default)")
-endif()
-
-if(WITH_ADIOS2)
-  # Maximum number of I/O decompositions registered with ADIOS type
-  set(DEF_SPIO_MAX_ADIOS_DECOMPS 65536)
-  if(DEFINED PIO_MAX_ADIOS_DECOMPS)
-    if(PIO_MAX_ADIOS_DECOMPS GREATER 0)
-      message(STATUS "Setting the maximum number of I/O decompositions registered with ADIOS type to PIO_MAX_ADIOS_DECOMPS = " ${PIO_MAX_ADIOS_DECOMPS})
-    else()
-      message(WARNING "User-defined PIO_MAX_ADIOS_DECOMPS is invalid, setting it to " ${DEF_SPIO_MAX_ADIOS_DECOMPS} " (default)")
-      set(PIO_MAX_ADIOS_DECOMPS ${DEF_SPIO_MAX_ADIOS_DECOMPS})
-    endif()
-  else()
-    set(PIO_MAX_ADIOS_DECOMPS ${DEF_SPIO_MAX_ADIOS_DECOMPS})
-    message(STATUS "Setting the maximum number of I/O decompositions registered with ADIOS type to PIO_MAX_ADIOS_DECOMPS = " ${PIO_MAX_ADIOS_DECOMPS} " (default)")
-  endif()
-
-  # Maximum number of cached application steps for ADIOS type
-  set(DEF_SPIO_MAX_CACHED_STEPS_FOR_ADIOS 128)
-  if(DEFINED PIO_MAX_CACHED_STEPS_FOR_ADIOS)
-    if(PIO_MAX_CACHED_STEPS_FOR_ADIOS GREATER 0)
-      message(STATUS "Setting the maximum number of cached application steps for ADIOS type to PIO_MAX_CACHED_STEPS_FOR_ADIOS = " ${PIO_MAX_CACHED_STEPS_FOR_ADIOS})
-    else()
-      message(WARNING "User-defined PIO_MAX_CACHED_STEPS_FOR_ADIOS is invalid, setting it to " ${DEF_SPIO_MAX_CACHED_STEPS_FOR_ADIOS} " (default)")
-      set(PIO_MAX_CACHED_STEPS_FOR_ADIOS ${DEF_SPIO_MAX_CACHED_STEPS_FOR_ADIOS})
-    endif()
-  else()
-    set(PIO_MAX_CACHED_STEPS_FOR_ADIOS ${DEF_SPIO_MAX_CACHED_STEPS_FOR_ADIOS})
-    message(STATUS "Setting the maximum number of cached application steps for ADIOS type to PIO_MAX_CACHED_STEPS_FOR_ADIOS = " ${PIO_MAX_CACHED_STEPS_FOR_ADIOS} " (default)")
-  endif()
-else()
-  set(PIO_MAX_ADIOS_DECOMPS 0)
-  set(PIO_MAX_STEP_CALLS_FOR_ADIOS 0)
-  message (STATUS "Configurable parameters used by ADIOS type are not applicable (default)")
 endif()
 
 #==============================================================================

@@ -1,6 +1,4 @@
-#cmake_minimum_required (VERSION 2.8.12)
-message("*** removed old version of src/clib/CMakeLists.txt, use root-level version ***")
-
+cmake_minimum_required (VERSION 2.8.12)
 include (CheckFunctionExists)
 include(CheckTypeSize)
 include(SPIOTypeUtils)
@@ -144,12 +142,7 @@ endif ()
 
 #===== HDF5-C =====
 if (WITH_HDF5)
-  message                   ("*** looking for HDF5 ***")
-  find_package (HDF5 COMPONENTS C HL)
-  message                   ("HDF5_C_LIBRARIES = " ${HDF5_C_LIBRARIES})
-  message                   ("HDF5_HL_LIBRARIES = " ${HDF5_HL_LIBRARIES})
-  message                   ("HDF5_C_LIBRARY_hdf5 = " ${HDF5_C_LIBRARY_hdf5})
-  message                   ("HDF5_C_LIBRARY_z = " ${HDF5_C_LIBRARY_z})
+  find_package (HDF5 COMPONENTS HL C)
   if (HDF5_C_FOUND)
     message(STATUS "HDF5 C library dependencies: ${HDF5_C_LIBRARIES} ${HDF5_HL_LIBRARIES}")
     set(PIO_USE_HDF5 1)
@@ -276,7 +269,7 @@ endif ()
 # The MPI library detection was done in the top level
 if (MPISERIAL_C_FOUND)
   target_compile_definitions (pioc
-    PUBLIC MPI_SERIAL)
+    PRIVATE MPI_SERIAL)
   target_include_directories (pioc
     PUBLIC ${MPISERIAL_C_INCLUDE_DIRS})
   target_link_libraries (pioc
